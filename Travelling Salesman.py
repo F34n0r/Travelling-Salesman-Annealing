@@ -11,7 +11,7 @@ temperatureSteps = 100
 
 "The total number of steps is: stepsPerTemp * temperatureSteps"
 
-distanceListReal = list()
+distanceList = list()
 
 def decreaseTemperatureLin():
     global temperature
@@ -90,7 +90,7 @@ def move():
             #print "Nope"
 
 temperature = startTemperature  
-randomStart()
+randomStart(np.random.randint(100000))
 lengthCurrent = lengthTotal(cities)
 for j in range(temperatureSteps):
     for i in range(stepsPerTemp):
