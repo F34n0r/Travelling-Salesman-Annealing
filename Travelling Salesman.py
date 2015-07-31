@@ -6,9 +6,9 @@ cities = np.loadtxt("input")       #each line of the input text is x y of a city
 l = len(cities)      
 track = np.arange(l)                #names of the cities
 startTemperature = 200.
-stepsPerTemp = 1000
+stepsPerTemp = 10000
 temperatureSteps = 100
-
+base = (1/startTemperature)**(1.0/temperatureSteps)
 "The total number of steps is: stepsPerTemp * temperatureSteps"
 
 distanceList = list()
@@ -18,8 +18,8 @@ def decreaseTemperatureLin():
     temperature -= startTemperature/temperatureSteps
 
 def decreaseTemperatureExp(t):
-    global temperature
-    temperature *= 0.99
+    global temperature,base
+    temperature *= base
 
 def randomStart(seed=111):
     global cities, track
@@ -100,8 +100,10 @@ for j in range(temperatureSteps):
         print lengthCurrent #, lengthTotal(cities)
     decreaseTemperatureExp(j)
 
-print track    
+print track 
+plt.close()   
 plt.plot(distanceList)
+plt.xkcd()
 plt.xlabel("Steps")
 plt.ylabel("Route length")
 plt.savefig('distance')
